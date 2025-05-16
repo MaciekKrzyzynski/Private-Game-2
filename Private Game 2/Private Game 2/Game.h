@@ -11,12 +11,16 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 #include "Globals.h"
+#include "Player.h"
+#include "Background.h"
 
 class Game
 {
 public:
 	Game();
 	~Game();
+	Player m_player;
+	Background m_background; 
 	/// <summary>
 	/// main method for game
 	/// </summary>
