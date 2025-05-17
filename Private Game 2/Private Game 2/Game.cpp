@@ -109,6 +109,9 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
+	m_background.move(m_resumeBackground);
+	m_resumeBackground = m_player.move(m_background.getBasePlatform());
 }
 
 /// <summary>

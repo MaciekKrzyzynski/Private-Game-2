@@ -9,6 +9,11 @@
 /// same as #pragma once
 /// Don't forget the endif at the bottom
 /// </summary>
+
+
+#include "SFML/Window.hpp"
+#include "SFML/Window/Keyboard.hpp"
+#include "SFML/Window/Event.hpp"
 #include <SFML/Graphics.hpp>
 #include "Globals.h"
 #include "Player.h"
@@ -21,9 +26,8 @@ public:
 	~Game();
 	Player m_player;
 	Background m_background; 
-	/// <summary>
-	/// main method for game
-	/// </summary>
+	bool m_resumeBackground{ false };
+
 	void run();
 
 private:
