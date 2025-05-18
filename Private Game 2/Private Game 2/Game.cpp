@@ -122,6 +122,8 @@ void Game::render()
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_background.getBasePlatform()); 
 	m_window.draw(m_player.getBody()); 
+	m_window.draw(m_background.getBoundWallL()); 
+	m_window.draw(m_background.getBoundWallR());
 	m_window.display();
 }
 

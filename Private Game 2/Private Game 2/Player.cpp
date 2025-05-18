@@ -25,9 +25,9 @@ bool Player::move(sf::RectangleShape t_base)
 	{
 		if (t_base.getPosition().x > 0.0f)
 		{
-			if (m_position.x < 0.0f)
+			if (m_position.x < 50.0f)
 			{
-				m_position.x = 0.0f;
+				m_position.x = 50.0f;
 			}
 			else
 			{
@@ -53,9 +53,9 @@ bool Player::move(sf::RectangleShape t_base)
 		}
 		else if (t_base.getPosition().x <= -1560.0f)
 		{
-			if (m_position.x > 1430.0f)
+			if (m_position.x > 1430.0f - 40.0f)
 			{
-				m_position.x = 1430.0f;
+				m_position.x = 1430.0f - 40.0f;
 			}
 			else
 			{
@@ -66,7 +66,7 @@ bool Player::move(sf::RectangleShape t_base)
 		}
 	}
 
-	if (m_freeRoam == true && m_position.x == SCREEN_WIDTH / 2.0f)
+	if (m_freeRoam == true && m_position.x <= SCREEN_WIDTH / 2.0f + 5.0f && m_position.x >= SCREEN_WIDTH / 2.0f - 5.0f)
 	{
 		m_freeRoam = false; 
 		m_resumeMove = true; 
