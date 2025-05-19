@@ -111,7 +111,11 @@ void Game::update(sf::Time t_deltaTime)
 	}
 
 	m_background.move(m_resumeBackground);
-	m_resumeBackground = m_player.move(m_background.getBasePlatform());
+	m_resumeBackground = m_player.move(m_background.getBasePlatform(), m_grapplePlayerTransition, m_background.getMoveObjectsX());
+
+	m_background.checkBinds();
+	m_background.jump();
+	m_grapplePlayerTransition = m_background.rotate(m_player.getBody()); 
 }
 
 /// <summary>
@@ -121,6 +125,7 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_background.getBasePlatform()); 
+	m_window.draw(m_background.getGrapple()); 
 	m_window.draw(m_player.getBody()); 
 	m_window.draw(m_background.getBoundWallL()); 
 	m_window.draw(m_background.getBoundWallR());

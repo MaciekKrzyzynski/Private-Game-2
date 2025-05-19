@@ -18,52 +18,72 @@ void Player::setupSprite()
 	m_body.setPosition(m_position); 
 }
 
-bool Player::move(sf::RectangleShape t_base)
+bool Player::move(sf::RectangleShape t_base, bool t_transition, float t_moveObjectsX)
 {
 	m_resumeMove = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if (t_base.getPosition().x > 0.0f)
+		if (!t_transition)// shouldnt be able to move while grappling
 		{
-			if (m_position.x < 50.0f)
+			if (t_base.getPosition().x > 0.0f)
 			{
-				m_position.x = 50.0f;
+				if (m_position.x < 50.0f)// boundary check
+				{
+					m_position.x = 50.0f;
+				}
+				else
+				{
+					m_freeRoam = true;
+					m_position.x -= m_speed;
+					m_body.setPosition(m_position);
+				}
 			}
-			else
+			else if (t_base.getPosition().x <= -1560.0f)
 			{
 				m_freeRoam = true;
 				m_position.x -= m_speed;
 				m_body.setPosition(m_position);
 			}
-		}
-		else if (t_base.getPosition().x <= -1560.0f)
-		{
-				m_freeRoam = true;
-				m_position.x -= m_speed;
-				m_body.setPosition(m_position);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		if (t_base.getPosition().x > 0.0f)
+		if (!t_transition)// shouldnt be able to move while grappling
 		{
-			m_freeRoam = true;
-			m_position.x += m_speed;
-			m_body.setPosition(m_position);
-		}
-		else if (t_base.getPosition().x <= -1560.0f)
-		{
-			if (m_position.x > 1430.0f - 40.0f)
-			{
-				m_position.x = 1430.0f - 40.0f;
-			}
-			else
+			if (t_base.getPosition().x > 0.0f)
 			{
 				m_freeRoam = true;
 				m_position.x += m_speed;
 				m_body.setPosition(m_position);
 			}
+			else if (t_base.getPosition().x <= -1560.0f)
+			{
+				if (m_position.x > 1430.0f - 40.0f)// boundary check
+				{
+					m_position.x = 1430.0f - 40.0f;
+				}
+				else
+				{
+					m_freeRoam = true;
+					m_position.x += m_speed;
+					m_body.setPosition(m_position);
+				}
+			}
 		}
+	}
+
+	if (t_transition)
+	{
+		m_position.x -= t_moveObjectsX;
+		if (m_position.x < 40.0f)
+		{
+			m_position.x = 40.0f;
+		}
+		if (m_position.x > 1430.0f - 40.0f)
+		{
+			m_position.x = 1430.0f - 40.0f;
+		}
+		m_body.setPosition(m_position);
 	}
 
 	if (m_freeRoam == true && m_position.x <= SCREEN_WIDTH / 2.0f + 5.0f && m_position.x >= SCREEN_WIDTH / 2.0f - 5.0f)

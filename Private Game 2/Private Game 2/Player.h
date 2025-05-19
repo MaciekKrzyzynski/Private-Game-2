@@ -16,7 +16,7 @@ public:
 
 	Player();
 	void setupSprite();
-	bool move(sf::RectangleShape t_base); 
+	bool move(sf::RectangleShape t_base, bool t_transition, float t_moveObjectsX); 
 
 	sf::Sprite getBody();
 	void setBody(sf::Sprite t_body);

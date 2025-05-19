@@ -27,7 +27,7 @@ public:
 	Player m_player;
 	Background m_background; 
 	bool m_resumeBackground{ false };
-
+	bool m_grapplePlayerTransition{ false };
 	void run();
 
 private:
